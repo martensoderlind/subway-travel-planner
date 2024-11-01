@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { Station } from "../../stationDB/mockdb";
 import { serviceFactory } from "./service";
+import { travelschema } from "./input";
 
 export function stationsFacory(subwayStations: Station[]) {
   const service = serviceFactory(subwayStations);
@@ -14,6 +15,11 @@ export function stationsFacory(subwayStations: Station[]) {
       });
       router.get("/from/:locationId/to/:destinationId", async (req, res) => {
         const { locationId, destinationId } = req.params;
+        const result = travelschema.safeParse({ locationId, destinationId });
+        if (!result.success) {
+          res.status(400).json(result.error.issues[0].message);
+          return;
+        }
         const travelTime = await service.travelTime(locationId, destinationId);
         res.json({ travelTime: travelTime });
       });
