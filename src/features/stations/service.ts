@@ -9,5 +9,15 @@ export function serviceFactory(subwayStations: Station[]) {
 
       return stations;
     },
+    travelTime: async (locationId: string, destinationId: string) => {
+      const from = subwayStations.find(
+        (station) => station.id === locationId.toUpperCase()
+      );
+      const to = subwayStations.find(
+        (station) => station.id === destinationId.toUpperCase()
+      );
+
+      return;
+    },
   };
 }
