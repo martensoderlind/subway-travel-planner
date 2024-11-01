@@ -1,10 +1,7 @@
 import { Station } from "../../stationDB/mockdb";
+import { TravelTime } from "./types";
 
-function calculateTravelTime(
-  start: number,
-  end: number,
-  subwayStations: Station[]
-) {
+function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   let time = 0;
   let nextStation = "";
   for (let i = start; i < end + 1; i++) {
@@ -39,17 +36,17 @@ export function serviceFactory(subwayStations: Station[]) {
       if (indexLocation === indexDestination) {
         return time;
       } else if (indexLocation > indexDestination) {
-        time = calculateTravelTime(
-          indexDestination,
-          indexLocation,
-          subwayStations
-        );
+        time = calculateTravelTime({
+          start: indexDestination,
+          end: indexLocation,
+          subwayStations,
+        });
       } else {
-        time = calculateTravelTime(
-          indexLocation,
-          indexDestination,
-          subwayStations
-        );
+        time = calculateTravelTime({
+          start: indexLocation,
+          end: indexDestination,
+          subwayStations,
+        });
       }
       return time;
     },
