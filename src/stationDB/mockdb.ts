@@ -6,7 +6,7 @@ interface Station {
   };
 }
 
-const subwayStations: Station[] = [
+export const subwayStations: Station[] = [
   {
     id: "ÅKESHOV",
     namn: "Åkeshov",
