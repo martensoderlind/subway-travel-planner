@@ -12,6 +12,12 @@ export function stationsFacory(subwayStations: Station[]) {
       router.get("/", async (req, res) => {
         res.send(await service.getAll());
       });
+      router.get("/from/:locationId/to/:destinationId", async (req, res) => {
+        const { locationId, destinationId } = req.params;
+        const travelTime = await service.travelTime(locationId, destinationId);
+        res.json({ travelTime: travelTime });
+      });
+
       return router;
     },
   };
