@@ -67,14 +67,14 @@ export const subwayStations: Station[] = [
     namn: "Fridhemsplan",
     relations: {
       THORILDSPLAN: 3,
-      STADSHAGEN: 2,
+      SANKT_ERIKSPLAN: 2,
     },
   },
   {
     id: "SANKT_ERIKSPLAN",
     namn: "S:t Eriksplan",
     relations: {
-      STADSHAGEN: 3,
+      FRIDHEMSPLAN: 3,
       ODENPLAN: 2,
     },
   },
