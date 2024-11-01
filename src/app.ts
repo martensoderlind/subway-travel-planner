@@ -1,13 +1,13 @@
 import express from "express";
 import { subwayStations } from "./stationDB/mockdb";
+import { stationsFacory } from "./features";
 export function createApp() {
   const app = express();
 
   app.use(express.json());
 
-  app.get("/", (req, res) => {
-    res.send(subwayStations);
-  });
+  const stationsModule = stationsFacory();
+  app.use("/api/stations", stationsModule.routerFatory());
 
   return app;
 }
