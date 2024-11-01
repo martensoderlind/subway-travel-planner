@@ -6,7 +6,7 @@ export function createApp() {
 
   app.use(express.json());
 
-  const stationsModule = stationsFacory();
+  const stationsModule = stationsFacory(subwayStations);
   app.use("/api/stations", stationsModule.routerFatory());
 
   return app;

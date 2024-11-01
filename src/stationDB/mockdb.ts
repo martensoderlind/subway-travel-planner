@@ -1,4 +1,4 @@
-interface Station {
+export interface Station {
   id: string;
   namn: string;
   relations: {
