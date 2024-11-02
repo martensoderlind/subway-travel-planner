@@ -1,5 +1,7 @@
+import { get } from "http";
 import { Station } from "../../stationDB/mockdb";
 import { GetStations, TravelTime } from "./types";
+import { stat } from "fs";
 
 function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   let time = 0;
@@ -31,9 +33,8 @@ function deltaIndexOfStation(
   return deltaIndex;
 }
 
-function validateStations(stationsId: GetStations) {
+function getStations(stationsId: GetStations) {
   const { locationId, destinationId, subwayStations } = stationsId;
-
   const firstStation = subwayStations.find(
     (station) => station.id === locationId.toUpperCase()
   );
@@ -41,16 +42,25 @@ function validateStations(stationsId: GetStations) {
     (station) => station.id === destinationId.toUpperCase()
   );
 
+  return { firstStation, secondStation };
+}
+
+function validateStations(stationsId: GetStations) {
+  const { subwayStations } = stationsId;
+
+  const { firstStation, secondStation } = getStations(stationsId);
   if (!firstStation || !secondStation) {
     return {
       message: "Try another spelling of the stations or try diffrent stations",
     };
   }
+
   const deltaIndex = deltaIndexOfStation(
-    firstStation,
-    secondStation,
+    firstStation!,
+    secondStation!,
     subwayStations
   );
+
   if (deltaIndex === 0 || deltaIndex > 1) {
     return { message: "the stations needs to be located after eachother" };
   }
