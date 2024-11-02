@@ -11,3 +11,10 @@ export type GetStations = {
   destinationId: string;
   subwayStations: Station[];
 };
+
+export type ValidateStations = {
+  locationId: string;
+  destinationId: string;
+  subwayStations: Station[];
+  request: string;
+};

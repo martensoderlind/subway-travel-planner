@@ -1,6 +1,6 @@
 import { get } from "http";
 import { Station } from "../../stationDB/mockdb";
-import { GetStations, TravelTime } from "./types";
+import { GetStations, TravelTime, ValidateStations } from "./types";
 import { stat } from "fs";
 
 function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
@@ -47,11 +47,11 @@ function getStations(stationsId: GetStations) {
   return { firstStation, secondStation };
 }
 
-function validateStations(stationsId: GetStations) {
-  const { subwayStations } = stationsId;
+function validateStations(stationsId: ValidateStations) {
+  const { subwayStations, request } = stationsId;
 
   const { firstStation, secondStation } = getStations(stationsId);
-
+  console.log(firstStation, secondStation);
   if (!firstStation || !secondStation) {
     return {
       message: "Try another spelling of the stations or try diffrent stations",
@@ -64,7 +64,10 @@ function validateStations(stationsId: GetStations) {
     subwayStations
   );
 
-  if (deltaIndex === 0 || deltaIndex > 1) {
+  if (deltaIndex === 0) {
+    return { message: "pick two diffrent stations" };
+  }
+  if (request === "patch" && deltaIndex > 1) {
     return { message: "the stations needs to be located after eachother" };
   }
   return { firstStation, secondStation };
@@ -81,23 +84,23 @@ export function serviceFactory(subwayStations: Station[]) {
     },
 
     get: async (locationId: string, destinationId: string) => {
-      const { firstStation, secondStation } = getStations({
+      const request = "get";
+      const stations = validateStations({
         locationId,
         destinationId,
         subwayStations,
+        request,
       });
-
-      let time = 0;
-      if (!firstStation || !secondStation) {
-        return "någon av stationerna finns inte";
+      if (stations.message) {
+        return stations.message;
       }
+      const { firstStation, secondStation } = stations;
+      let time = 0;
 
-      const indexLocation = subwayStations.indexOf(firstStation);
-      const indexDestination = subwayStations.indexOf(secondStation);
+      const indexLocation = subwayStations.indexOf(firstStation!);
+      const indexDestination = subwayStations.indexOf(secondStation!);
 
-      if (indexLocation === indexDestination) {
-        return time;
-      } else if (indexLocation > indexDestination) {
+      if (indexLocation > indexDestination) {
         time = calculateTravelTime({
           start: indexDestination,
           end: indexLocation,
@@ -118,10 +121,12 @@ export function serviceFactory(subwayStations: Station[]) {
       destinationId: string,
       newTravelTime: number
     ) => {
+      const request = "patch";
       const stations = validateStations({
         locationId,
         destinationId,
         subwayStations,
+        request,
       });
       if (stations.message) {
         return stations.message;
