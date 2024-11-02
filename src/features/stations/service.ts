@@ -31,7 +31,7 @@ function deltaIndexOfStation(
   return deltaIndex;
 }
 
-function getStations(stationsId: GetStations) {
+function validateStations(stationsId: GetStations) {
   const { locationId, destinationId, subwayStations } = stationsId;
 
   const firstStation = subwayStations.find(
@@ -77,6 +77,7 @@ export function serviceFactory(subwayStations: Station[]) {
       if (!from || !to) {
         return time;
       }
+
       const indexLocation = subwayStations.indexOf(from);
       const indexDestination = subwayStations.indexOf(to);
       if (indexLocation === indexDestination) {
@@ -101,7 +102,7 @@ export function serviceFactory(subwayStations: Station[]) {
       destinationId: string,
       newTravelTime: number
     ) => {
-      const stations = getStations({
+      const stations = validateStations({
         locationId,
         destinationId,
         subwayStations,
