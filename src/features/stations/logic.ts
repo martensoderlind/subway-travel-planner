@@ -21,7 +21,7 @@ export function calculateTravelTime({
 }: TravelTime) {
   let time = 0;
   let nextStation = "";
-  for (let i = start; i < end + 1; i++) {
+  for (let i = start; i < end; i++) {
     nextStation = subwayStations[i + 1].id;
     time += subwayStations[i].relations[nextStation];
   }
@@ -66,7 +66,6 @@ export function validateStations(stationsId: ValidateStations) {
   const { subwayStations, request } = stationsId;
 
   const { firstStation, secondStation } = getStations(stationsId);
-  console.log(firstStation, secondStation);
   if (!firstStation || !secondStation) {
     return {
       message: "Try another spelling of the stations or try diffrent stations",

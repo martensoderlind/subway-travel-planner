@@ -23,7 +23,7 @@ export function stationsFacory(subwayStations: Station[]) {
         }
 
         const travelTime = await service.get(locationId, destinationId);
-        res.json({ travelTime: travelTime });
+        res.json(travelTime);
       });
 
       router.patch("/from/:locationId/to/:destinationId/", async (req, res) => {
