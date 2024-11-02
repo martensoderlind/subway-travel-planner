@@ -6,8 +6,14 @@ export function getTravelTime(
   secondStation: Station,
   subwayStations: Station[]
 ) {
-  const indexLocation = subwayStations.indexOf(firstStation!);
-  const indexDestination = subwayStations.indexOf(secondStation!);
+  const indexLocation = subwayStations.findIndex(
+    (station) => station.id === firstStation.id
+  );
+  const indexDestination = subwayStations.findIndex(
+    (station) => station.id === secondStation.id
+  );
+  console.log(indexDestination, indexLocation);
+  // const indexDestination = subwayStations.indexOf(secondStation!);
 
   const start = Math.min(indexLocation, indexDestination);
   const end = Math.max(indexLocation, indexDestination);
