@@ -1,5 +1,5 @@
 import { Station } from "../../stationDB/mockdb";
-import { TravelTime } from "./types";
+import { GetStations, TravelTime } from "./types";
 
 function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   let time = 0;
@@ -17,9 +17,44 @@ function updateSection(
 ) {
   firstStation.relations[secondStation.id] = newTravelTime;
   secondStation.relations[firstStation.id] = newTravelTime;
-  console.log(firstStation);
-  console.log(secondStation);
   return "travel time updated";
+}
+
+function deltaIndexOfStation(
+  firstStation: Station,
+  secondStation: Station,
+  subwayStations: Station[]
+) {
+  const deltaIndex = Math.abs(
+    subwayStations.indexOf(firstStation) - subwayStations.indexOf(secondStation)
+  );
+  return deltaIndex;
+}
+
+function getStations(stationsId: GetStations) {
+  const { locationId, destinationId, subwayStations } = stationsId;
+
+  const firstStation = subwayStations.find(
+    (station) => station.id === locationId.toUpperCase()
+  );
+  const secondStation = subwayStations.find(
+    (station) => station.id === destinationId.toUpperCase()
+  );
+
+  if (!firstStation || !secondStation) {
+    return {
+      message: "Try another spelling of the stations or try diffrent stations",
+    };
+  }
+  const deltaIndex = deltaIndexOfStation(
+    firstStation,
+    secondStation,
+    subwayStations
+  );
+  if (deltaIndex === 0 || deltaIndex > 1) {
+    return { message: "the stations needs to be located after eachother" };
+  }
+  return { firstStation, secondStation };
 }
 
 export function serviceFactory(subwayStations: Station[]) {
@@ -66,30 +101,17 @@ export function serviceFactory(subwayStations: Station[]) {
       destinationId: string,
       newTravelTime: number
     ) => {
-      console.log("patch");
-      const from = subwayStations.find(
-        (station) => station.id === locationId.toUpperCase()
-      );
-      const to = subwayStations.find(
-        (station) => station.id === destinationId.toUpperCase()
-      );
-      let message = "";
-      if (!from || !to) {
-        message =
-          "Try another spelling of the stations or try diffrent stations";
-        return message;
+      const stations = getStations({
+        locationId,
+        destinationId,
+        subwayStations,
+      });
+      if (stations.message) {
+        return stations.message;
       }
-      const indexLocation = subwayStations.indexOf(from);
-      const indexDestination = subwayStations.indexOf(to);
-      if (Math.abs(indexDestination - indexLocation) !== 1) {
-        message = "the stations needs to be located after eachother";
-        return message;
-      }
+      const { firstStation, secondStation } = stations;
 
-      if (indexLocation > indexDestination) {
-        return (message = updateSection(from, to, newTravelTime));
-      }
-      return (message = updateSection(to, from, newTravelTime));
+      return updateSection(firstStation!, secondStation!, newTravelTime);
     },
   };
 }

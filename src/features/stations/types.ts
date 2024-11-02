@@ -5,3 +5,9 @@ export type TravelTime = {
   end: number;
   subwayStations: Station[];
 };
+
+export type GetStations = {
+  locationId: string;
+  destinationId: string;
+  subwayStations: Station[];
+};
