@@ -1,7 +1,19 @@
 import { get } from "http";
 import { Station } from "../../stationDB/mockdb";
 import { GetStations, TravelTime, ValidateStations } from "./types";
-import { stat } from "fs";
+
+function getTravelTime(
+  firstStation: Station,
+  secondStation: Station,
+  subwayStations: Station[]
+) {
+  const indexLocation = subwayStations.indexOf(firstStation!);
+  const indexDestination = subwayStations.indexOf(secondStation!);
+
+  const start = Math.min(indexLocation, indexDestination);
+  const end = Math.max(indexLocation, indexDestination);
+  return calculateTravelTime({ start, end, subwayStations });
+}
 
 function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   let time = 0;
@@ -95,25 +107,7 @@ export function serviceFactory(subwayStations: Station[]) {
         return stations.message;
       }
       const { firstStation, secondStation } = stations;
-      let time = 0;
-
-      const indexLocation = subwayStations.indexOf(firstStation!);
-      const indexDestination = subwayStations.indexOf(secondStation!);
-
-      if (indexLocation > indexDestination) {
-        time = calculateTravelTime({
-          start: indexDestination,
-          end: indexLocation,
-          subwayStations,
-        });
-      } else {
-        time = calculateTravelTime({
-          start: indexLocation,
-          end: indexDestination,
-          subwayStations,
-        });
-      }
-      return time;
+      return getTravelTime(firstStation!, secondStation!, subwayStations);
     },
 
     patchSection: async (
