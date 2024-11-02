@@ -12,6 +12,7 @@ function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   }
   return time;
 }
+
 function updateSection(
   firstStation: Station,
   secondStation: Station,
@@ -58,8 +59,8 @@ function validateStations(stationsId: GetStations) {
   }
 
   const deltaIndex = deltaIndexOfStation(
-    firstStation!,
-    secondStation!,
+    firstStation,
+    secondStation,
     subwayStations
   );
 
@@ -78,6 +79,7 @@ export function serviceFactory(subwayStations: Station[]) {
 
       return stations;
     },
+
     get: async (locationId: string, destinationId: string) => {
       const { firstStation, secondStation } = getStations({
         locationId,
@@ -87,7 +89,7 @@ export function serviceFactory(subwayStations: Station[]) {
 
       let time = 0;
       if (!firstStation || !secondStation) {
-        return time;
+        return "någon av stationerna finns inte";
       }
 
       const indexLocation = subwayStations.indexOf(firstStation);
@@ -110,6 +112,7 @@ export function serviceFactory(subwayStations: Station[]) {
       }
       return time;
     },
+
     patchSection: async (
       locationId: string,
       destinationId: string,
