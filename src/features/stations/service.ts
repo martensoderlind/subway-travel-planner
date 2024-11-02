@@ -35,6 +35,7 @@ function deltaIndexOfStation(
 
 function getStations(stationsId: GetStations) {
   const { locationId, destinationId, subwayStations } = stationsId;
+
   const firstStation = subwayStations.find(
     (station) => station.id === locationId.toUpperCase()
   );
@@ -49,6 +50,7 @@ function validateStations(stationsId: GetStations) {
   const { subwayStations } = stationsId;
 
   const { firstStation, secondStation } = getStations(stationsId);
+
   if (!firstStation || !secondStation) {
     return {
       message: "Try another spelling of the stations or try diffrent stations",
@@ -77,19 +79,20 @@ export function serviceFactory(subwayStations: Station[]) {
       return stations;
     },
     get: async (locationId: string, destinationId: string) => {
-      const from = subwayStations.find(
-        (station) => station.id === locationId.toUpperCase()
-      );
-      const to = subwayStations.find(
-        (station) => station.id === destinationId.toUpperCase()
-      );
+      const { firstStation, secondStation } = getStations({
+        locationId,
+        destinationId,
+        subwayStations,
+      });
+
       let time = 0;
-      if (!from || !to) {
+      if (!firstStation || !secondStation) {
         return time;
       }
 
-      const indexLocation = subwayStations.indexOf(from);
-      const indexDestination = subwayStations.indexOf(to);
+      const indexLocation = subwayStations.indexOf(firstStation);
+      const indexDestination = subwayStations.indexOf(secondStation);
+
       if (indexLocation === indexDestination) {
         return time;
       } else if (indexLocation > indexDestination) {
