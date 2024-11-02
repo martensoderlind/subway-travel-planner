@@ -11,5 +11,12 @@ export function serviceFactory(favouriteRoutes: FavouriteRoutes[]) {
       favouriteRoutes.push(route);
       return { message: "New favourite route added" };
     },
+    delete: async (id: string) => {
+      const routeIndexToRemove = favouriteRoutes.findIndex(
+        (route) => route.id === id
+      );
+      favouriteRoutes.splice(routeIndexToRemove, 1);
+      return { message: "Route removed" };
+    },
   };
 }

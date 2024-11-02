@@ -13,7 +13,10 @@ export function routeFacory(favouriteRoutes: FavouriteRoutes[]) {
       router.get("/", async (req, res) => {
         res.send(await service.getAll());
       });
-      router.delete("/:id", async (req, res) => {});
+      router.delete("/:id", async (req, res) => {
+        const id = req.params.id;
+        res.send(await service.delete(id));
+      });
 
       router.post("/", async (req, res) => {
         const { from, to, time } = req.body;
