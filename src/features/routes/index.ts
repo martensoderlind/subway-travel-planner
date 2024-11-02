@@ -12,6 +12,8 @@ export function routeFacory(favouriteRoutes: FavouriteRoutes[]) {
       router.get("/", async (req, res) => {
         res.send(await service.getAll());
       });
+      router.delete("/:id", async (req, res) => {});
+      router.post("/", async (req, res) => {});
 
       return router;
     },
