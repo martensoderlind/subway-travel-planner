@@ -10,6 +10,17 @@ function calculateTravelTime({ start, end, subwayStations }: TravelTime) {
   }
   return time;
 }
+function updateSection(
+  firstStation: Station,
+  secondStation: Station,
+  newTravelTime: number
+) {
+  firstStation.relations[secondStation.id] = newTravelTime;
+  secondStation.relations[firstStation.id] = newTravelTime;
+  console.log(firstStation);
+  console.log(secondStation);
+  return "travel time updated";
+}
 
 export function serviceFactory(subwayStations: Station[]) {
   return {
@@ -49,6 +60,36 @@ export function serviceFactory(subwayStations: Station[]) {
         });
       }
       return time;
+    },
+    patchSection: async (
+      locationId: string,
+      destinationId: string,
+      newTravelTime: number
+    ) => {
+      console.log("patch");
+      const from = subwayStations.find(
+        (station) => station.id === locationId.toUpperCase()
+      );
+      const to = subwayStations.find(
+        (station) => station.id === destinationId.toUpperCase()
+      );
+      let message = "";
+      if (!from || !to) {
+        message =
+          "Try another spelling of the stations or try diffrent stations";
+        return message;
+      }
+      const indexLocation = subwayStations.indexOf(from);
+      const indexDestination = subwayStations.indexOf(to);
+      if (Math.abs(indexDestination - indexLocation) !== 1) {
+        message = "the stations needs to be located after eachother";
+        return message;
+      }
+
+      if (indexLocation > indexDestination) {
+        return (message = updateSection(from, to, newTravelTime));
+      }
+      return (message = updateSection(to, from, newTravelTime));
     },
   };
 }
