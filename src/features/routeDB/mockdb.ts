@@ -7,7 +7,7 @@ export type FavouriteRoutes = {
 
 export const favouriteRoutes: FavouriteRoutes[] = [
   {
-    id: "sadw",
+    id: "b922b09e-09e6-4bb8-a6a2-3b80197188ab",
     from: "Bagarmossen",
     to: "Fridhemsplan",
     travelTime: 30,
