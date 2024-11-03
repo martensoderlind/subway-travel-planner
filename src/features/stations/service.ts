@@ -1,5 +1,11 @@
 import { Station } from "../../stationDB/mockdb";
-import { getTravelTime, updateSection, validateStations } from "./logic";
+import {
+  getDepartures,
+  getDirection,
+  getTravelTime,
+  updateSection,
+  validateStations,
+} from "./logic";
 
 export function serviceFactory(subwayStations: Station[]) {
   return {
@@ -22,6 +28,13 @@ export function serviceFactory(subwayStations: Station[]) {
       if (stations.message) {
         return stations.message;
       }
+      const hour = new Date().getHours;
+      const direction = getDirection({
+        locationId,
+        destinationId,
+        subwayStations,
+      });
+      const departures = getDepartures(locationId, direction, subwayStations);
       const { firstStation, secondStation } = stations;
       return getTravelTime(firstStation!, secondStation!, subwayStations);
     },
