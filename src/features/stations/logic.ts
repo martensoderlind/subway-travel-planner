@@ -12,8 +12,6 @@ export function getTravelTime(
   const indexDestination = subwayStations.findIndex(
     (station) => station.id === secondStation.id
   );
-  console.log(indexDestination, indexLocation);
-  // const indexDestination = subwayStations.indexOf(secondStation!);
 
   const start = Math.min(indexLocation, indexDestination);
   const end = Math.max(indexLocation, indexDestination);
@@ -83,7 +81,6 @@ export function validateStations(stationsId: ValidateStations) {
     secondStation,
     subwayStations
   );
-
   if (deltaIndex === 0) {
     return { message: "pick two diffrent stations" };
   }
