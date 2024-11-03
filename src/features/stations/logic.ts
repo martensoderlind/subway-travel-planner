@@ -111,7 +111,7 @@ export function getDepartures(
     ? station?.departuresSouth
     : station?.departuresNorth;
 }
-export function firstDeparture(time: number, departures: number[]) {
+export function getFirstDeparture(time: number, departures: number[]) {
   let closest = 60;
   let dif;
   let smallestDif = 60;
@@ -133,4 +133,20 @@ export function firstDeparture(time: number, departures: number[]) {
     departure: closest,
     houres: 0,
   };
+}
+
+export function getTimeOfArrival(
+  hour: number,
+  houres: number,
+  departure: number,
+  travelTime: number
+) {
+  let arrivalHour = hour + houres;
+  let arrivalMinute = departure + travelTime;
+  if (arrivalMinute > 60) {
+    arrivalMinute -= 60;
+    arrivalHour += 1;
+  }
+  const formatMinutes = arrivalMinute.toString().padStart(2, "0");
+  return `${arrivalHour}:${formatMinutes}`;
 }

@@ -1,11 +1,13 @@
 import { Station } from "../../stationDB/mockdb";
+import { travelschema } from "./input";
 import {
-  firstDeparture,
+  getFirstDeparture,
   getDepartures,
   getDirection,
   getTravelTime,
   updateSection,
   validateStations,
+  getTimeOfArrival,
 } from "./logic";
 
 export function serviceFactory(subwayStations: Station[]) {
@@ -26,6 +28,7 @@ export function serviceFactory(subwayStations: Station[]) {
         subwayStations,
         request,
       });
+
       if (stations.message) {
         return stations.message;
       }
@@ -39,10 +42,25 @@ export function serviceFactory(subwayStations: Station[]) {
 
       const departures = getDepartures(locationId, direction, subwayStations);
 
+      const travelTime = getTravelTime(
+        firstStation!,
+        secondStation!,
+        subwayStations
+      );
       const hour = new Date().getHours();
       const minutes = new Date().getMinutes();
-      const { departure, houres } = firstDeparture(minutes, departures!);
-      return getTravelTime(firstStation!, secondStation!, subwayStations);
+      const { departure, houres } = getFirstDeparture(minutes, departures!);
+      const timeOfArrival = getTimeOfArrival(
+        hour,
+        houres,
+        departure,
+        travelTime
+      );
+      return {
+        Departure_Time: `${hour + houres}:${departure}`,
+        Travel_Time: travelTime,
+        Arrival_time: timeOfArrival,
+      };
     },
 
     patchSection: async (
