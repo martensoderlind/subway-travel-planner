@@ -57,7 +57,9 @@ export function serviceFactory(subwayStations: Station[]) {
         travelTime
       );
       return {
-        Departure_Time: `${hour + houres}:${departure}`,
+        Departure_Time: `${hour + houres}:${departure
+          .toString()
+          .padStart(2, "0")}`,
         Travel_Time: travelTime,
         Arrival_time: timeOfArrival,
       };
