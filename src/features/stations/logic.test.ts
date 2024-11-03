@@ -11,6 +11,7 @@ import { Station, subwayStations } from "../../stationDB/mockdb";
 import {
   calculateTravelTime,
   getFirstDeparture,
+  getTimeOfArrival,
   getTravelTime,
   validateStations,
 } from "./logic";
@@ -105,5 +106,31 @@ describe("Format of travel response", () => {
       departure: 30,
       houres: 0,
     });
+  });
+});
+
+describe("time of arrival should", () => {
+  test("calculate correct time of arrival with in same hour", () => {
+    const result = getTimeOfArrival(14, 0, 30, 15);
+    expect(result).toBe("14:45");
+  });
+  test("correctly add hour when minutes>60 ", () => {
+    const result = getTimeOfArrival(14, 0, 45, 20);
+    expect(result).toBe("15:05");
+  });
+
+  test("add extra houres from input", () => {
+    const result = getTimeOfArrival(14, 2, 30, 15);
+    expect(result).toBe("16:45");
+  });
+
+  test("format minutes with leading zero", () => {
+    const result = getTimeOfArrival(14, 0, 5, 4);
+    expect(result).toBe("14:09");
+  });
+
+  test("handle long travel times", () => {
+    const result = getTimeOfArrival(14, 0, 30, 55);
+    expect(result).toBe("15:25");
   });
 });
