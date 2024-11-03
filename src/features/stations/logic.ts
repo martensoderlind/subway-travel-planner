@@ -111,3 +111,26 @@ export function getDepartures(
     ? station?.departuresSouth
     : station?.departuresNorth;
 }
+export function firstDeparture(time: number, departures: number[]) {
+  let closest = 60;
+  let dif;
+  let smallestDif = 60;
+  let hour = 0;
+  for (let i = 0; i < departures.length; i++) {
+    dif = departures[i] - time;
+    if (dif > 0 && smallestDif > dif) {
+      smallestDif = dif;
+      closest = departures[i];
+    }
+  }
+  if (closest === 60) {
+    return {
+      departure: departures[0],
+      houres: 1,
+    };
+  }
+  return {
+    departure: closest,
+    houres: 0,
+  };
+}
