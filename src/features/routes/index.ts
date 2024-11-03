@@ -20,7 +20,7 @@ export function routeFacory(favouriteRoutes: FavouriteRoutes[]) {
         if (!result.success) {
           res.status(400).json(result.error.issues[0].message);
         }
-        res.send(await service.delete(id));
+        res.status(200).send(await service.delete(id));
       });
 
       router.post("/", async (req, res) => {
@@ -30,7 +30,9 @@ export function routeFacory(favouriteRoutes: FavouriteRoutes[]) {
           res.status(400).json(result.error.issues[0].message);
         }
         const id = v4();
-        res.send(await service.post({ id, from, to, travelTime: time }));
+        res
+          .status(201)
+          .send(await service.post({ id, from, to, travelTime: time }));
       });
 
       return router;
