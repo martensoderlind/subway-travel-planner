@@ -49,6 +49,7 @@ export function serviceFactory(subwayStations: Station[]) {
       );
       const hour = new Date().getHours();
       const minutes = new Date().getMinutes();
+
       const { departure, houres } = getFirstDeparture(minutes, departures!);
       const timeOfArrival = getTimeOfArrival(
         hour,
