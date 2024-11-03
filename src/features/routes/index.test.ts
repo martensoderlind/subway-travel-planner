@@ -1,7 +1,6 @@
 import test, { describe } from "node:test";
 import request from "supertest";
 import { createApp } from "../../app";
-import { favouriteRoutes } from "../routeDB/mockdb";
 
 describe("Favourite routes", () => {
   test.skip("favourite routes to have one input", async () => {
@@ -23,19 +22,5 @@ describe("Favourite routes", () => {
         }),
       ])
     );
-  });
-  test.skip("should successfully create a new route", async () => {
-    const app = createApp();
-    const newFavouriteRoute = {
-      from: "Bagarmossen",
-      to: "Slussen",
-      time: 16,
-    };
-
-    const response = await request(app)
-      .post("/api/routes/")
-      .send(newFavouriteRoute);
-
-    expect(favouriteRoutes.length).toBe(1);
   });
 });
