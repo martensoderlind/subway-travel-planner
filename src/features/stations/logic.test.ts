@@ -8,7 +8,12 @@
 
 import test, { describe } from "node:test";
 import { Station, subwayStations } from "../../stationDB/mockdb";
-import { calculateTravelTime, getTravelTime, validateStations } from "./logic";
+import {
+  calculateTravelTime,
+  getFirstDeparture,
+  getTravelTime,
+  validateStations,
+} from "./logic";
 import request from "supertest";
 import { createApp } from "../../app";
 
@@ -56,21 +61,49 @@ describe("Calculate travelTime", () => {
   test("travel between bagarmossen and kärrtorp should take 2 min", async () => {
     const app = createApp();
 
-    const result = await request(app).get(
+    const response = await request(app).get(
       "/api/stations/from/bagarmossen/to/kärrtorp"
     );
-    const { text } = result;
-    console.log(text);
-    expect(parseInt(text)).toEqual(2);
+    const { Travel_Time } = await response.body;
+    expect(parseInt(Travel_Time)).toEqual(2);
   });
   test("travel between bagarmossen and slussen should take 16 min", async () => {
     const app = createApp();
 
-    const result = await request(app).get(
+    const response = await request(app).get(
       "/api/stations/from/bagarmossen/to/slussen"
     );
-    const { text } = result;
-    console.log(text);
-    expect(parseInt(text)).toEqual(16);
+    const { Travel_Time } = await response.body;
+    expect(parseInt(Travel_Time)).toEqual(17);
+  });
+});
+
+describe("Format of travel response", () => {
+  test("getFirstDeparture should return 30", () => {
+    const time = 18;
+    const departures = [15, 30, 45, 0];
+    const result = getFirstDeparture(time, departures);
+    expect(result).toEqual({
+      departure: 30,
+      houres: 0,
+    });
+  });
+  test("return first value when time > last value, also hour=1", () => {
+    const time = 55;
+    const departures = [10, 20, 30, 40, 50];
+    const result = getFirstDeparture(time, departures);
+    expect(result).toEqual({
+      departure: 10,
+      houres: 1,
+    });
+  });
+  test("handle match between time and departure", () => {
+    const time = 20;
+    const departures = [10, 20, 30];
+    const result = getFirstDeparture(time, departures);
+    expect(result).toEqual({
+      departure: 30,
+      houres: 0,
+    });
   });
 });
