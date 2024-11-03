@@ -89,3 +89,25 @@ export function validateStations(stationsId: ValidateStations) {
   }
   return { firstStation, secondStation };
 }
+
+export function getDirection(stations: GetStations) {
+  const { subwayStations } = stations;
+  const { firstStation, secondStation } = getStations(stations);
+  const direction =
+    subwayStations.indexOf(firstStation!) -
+    subwayStations.indexOf(secondStation!);
+  return direction > 0 ? "South" : "North";
+}
+
+export function getDepartures(
+  locationId: string,
+  direction: string,
+  subwayStations: Station[]
+) {
+  const station = subwayStations.find(
+    (station) => station.id === locationId.toUpperCase()
+  );
+  return direction === "South"
+    ? station?.departuresSouth
+    : station?.departuresNorth;
+}
