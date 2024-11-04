@@ -3,7 +3,8 @@ import { Station } from "../../stationDB/mockdb";
 import { serviceFactory } from "./service";
 import { travelschema } from "./input";
 
-export function stationsFactory(subwayStations: Station[]) {
+export function createStationsRouter(subwayStations: Station[]) {
+  //naming: createStationsRouter
   const service = serviceFactory(subwayStations);
   return {
     service,

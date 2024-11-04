@@ -4,7 +4,7 @@ import { FavouriteRoutes } from "../routeDB/mockdb";
 import { v4 } from "uuid";
 import { deleteSchema, postSchema } from "./input";
 
-export function routeFactory(favouriteRoutes: FavouriteRoutes[]) {
+export function createFavouriteRouteRouter(favouriteRoutes: FavouriteRoutes[]) {
   const service = serviceFactory(favouriteRoutes);
   return {
     service,
