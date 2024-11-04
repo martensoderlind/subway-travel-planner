@@ -16,7 +16,7 @@ export const subwayStations: Station[] = [
       BAGARMOSSEN: 2,
     },
     departuresNorth: [0, 15, 30, 45],
-    departuresSouth: [52, 7, 22, 37],
+    departuresSouth: [7, 22, 37, 52],
   },
   {
     id: "BAGARMOSSEN",
@@ -26,7 +26,7 @@ export const subwayStations: Station[] = [
       KÄRRTORP: 2,
     },
     departuresNorth: [2, 17, 32, 47],
-    departuresSouth: [50, 5, 20, 35],
+    departuresSouth: [5, 20, 35, 50],
   },
   {
     id: "KÄRRTORP",
@@ -36,7 +36,7 @@ export const subwayStations: Station[] = [
       BJÖRKHAGEN: 2,
     },
     departuresNorth: [4, 19, 34, 49],
-    departuresSouth: [48, 0, 18, 33],
+    departuresSouth: [0, 18, 33, 48],
   },
   {
     id: "BJÖRKHAGEN",
@@ -46,7 +46,7 @@ export const subwayStations: Station[] = [
       HAMMARBYHÖJDEN: 2,
     },
     departuresNorth: [6, 21, 36, 51],
-    departuresSouth: [46, 1, 16, 31],
+    departuresSouth: [1, 16, 31, 46],
   },
   {
     id: "HAMMARBYHÖJDEN",
@@ -56,7 +56,7 @@ export const subwayStations: Station[] = [
       SKÄRMARBRINK: 2,
     },
     departuresNorth: [8, 23, 38, 53],
-    departuresSouth: [44, 59, 14, 29],
+    departuresSouth: [14, 29, 44, 59],
   },
   {
     id: "SKÄRMARBRINK",
@@ -66,7 +66,7 @@ export const subwayStations: Station[] = [
       GULLMARSPLAN: 3,
     },
     departuresNorth: [10, 25, 40, 55],
-    departuresSouth: [42, 57, 12, 27],
+    departuresSouth: [12, 27, 42, 57],
   },
   {
     id: "GULLMARSPLAN",
@@ -76,7 +76,7 @@ export const subwayStations: Station[] = [
       SKANSTULL: 2,
     },
     departuresNorth: [13, 28, 43, 58],
-    departuresSouth: [39, 54, 9, 24],
+    departuresSouth: [9, 24, 39, 54],
   },
   {
     id: "SKANSTULL",
@@ -85,8 +85,8 @@ export const subwayStations: Station[] = [
       GULLMARSPLAN: 2,
       MEDBORGARPLATSEN: 2,
     },
-    departuresNorth: [15, 30, 45, 0],
-    departuresSouth: [37, 52, 7, 22],
+    departuresNorth: [0, 15, 30, 45],
+    departuresSouth: [7, 22, 37, 52],
   },
   {
     id: "MEDBORGARPLATSEN",
@@ -95,8 +95,8 @@ export const subwayStations: Station[] = [
       SKANSTULL: 2,
       SLUSSEN: 2,
     },
-    departuresNorth: [17, 32, 47, 2],
-    departuresSouth: [35, 50, 5, 20],
+    departuresNorth: [2, 17, 32, 47],
+    departuresSouth: [5, 20, 35, 50],
   },
   {
     id: "SLUSSEN",
@@ -105,8 +105,8 @@ export const subwayStations: Station[] = [
       MEDBORGARPLATSEN: 2,
       GAMLA_STAN: 2,
     },
-    departuresNorth: [19, 34, 49, 4],
-    departuresSouth: [33, 48, 0, 18],
+    departuresNorth: [4, 19, 34, 49],
+    departuresSouth: [0, 18, 33, 48],
   },
   {
     id: "GAMLA_STAN",
@@ -115,15 +115,15 @@ export const subwayStations: Station[] = [
       SLUSSEN: 2,
       T_CENTRALEN: 2,
     },
-    departuresNorth: [21, 36, 51, 6],
-    departuresSouth: [31, 46, 1, 16],
+    departuresNorth: [6, 21, 36, 51],
+    departuresSouth: [1, 16, 31, 46],
   },
   {
     id: "T_CENTRALEN",
     name: "T-Centralen",
     relations: { GAMLA_STAN: 2, HÖTORGET: 2 },
-    departuresNorth: [23, 38, 53, 8],
-    departuresSouth: [29, 44, 59, 14],
+    departuresNorth: [8, 23, 38, 53],
+    departuresSouth: [14, 29, 44, 59],
   },
   {
     id: "HÖTORGET",
@@ -132,8 +132,8 @@ export const subwayStations: Station[] = [
       T_CENTRALEN: 2,
       RÅDMANSGATAN: 2,
     },
-    departuresNorth: [25, 40, 55, 10],
-    departuresSouth: [27, 42, 57, 12],
+    departuresNorth: [10, 25, 40, 55],
+    departuresSouth: [12, 27, 42, 57],
   },
   {
     id: "RÅDMANSGATAN",
@@ -142,8 +142,8 @@ export const subwayStations: Station[] = [
       HÖTORGET: 2,
       ODENPLAN: 2,
     },
-    departuresNorth: [27, 42, 57, 12],
-    departuresSouth: [25, 40, 55, 10],
+    departuresNorth: [12, 27, 42, 57],
+    departuresSouth: [10, 25, 40, 55],
   },
   {
     id: "ODENPLAN",
@@ -152,8 +152,8 @@ export const subwayStations: Station[] = [
       RÅDMANSGATAN: 2,
       SANKT_ERIKSPLAN: 2,
     },
-    departuresNorth: [29, 44, 59, 14],
-    departuresSouth: [23, 38, 53, 8],
+    departuresNorth: [14, 29, 44, 59],
+    departuresSouth: [8, 23, 38, 53],
   },
   {
     id: "SANKT_ERIKSPLAN",
@@ -162,8 +162,8 @@ export const subwayStations: Station[] = [
       ODENPLAN: 2,
       FRIDHEMSPLAN: 3,
     },
-    departuresNorth: [31, 46, 1, 14],
-    departuresSouth: [21, 36, 51, 6],
+    departuresNorth: [1, 14, 31, 46],
+    departuresSouth: [6, 21, 36, 51],
   },
   {
     id: "FRIDHEMSPLAN",
@@ -172,8 +172,8 @@ export const subwayStations: Station[] = [
       SANKT_ERIKSPLAN: 3,
       THORILDSPLAN: 3,
     },
-    departuresNorth: [34, 49, 4, 117],
-    departuresSouth: [18, 33, 48, 3],
+    departuresNorth: [4, 17, 34, 49],
+    departuresSouth: [3, 18, 33, 48],
   },
 
   {
@@ -183,8 +183,8 @@ export const subwayStations: Station[] = [
       FRIDHEMSPLAN: 3,
       KRISTINEBERG: 2,
     },
-    departuresNorth: [37, 52, 7, 22],
-    departuresSouth: [15, 30, 45, 0],
+    departuresNorth: [7, 22, 37, 52],
+    departuresSouth: [0, 15, 30, 45],
   },
   {
     id: "KRISTINEBERG",
@@ -193,7 +193,7 @@ export const subwayStations: Station[] = [
       THORILDSPLAN: 2,
       ALVIK: 3,
     },
-    departuresNorth: [39, 54, 9, 24],
+    departuresNorth: [9, 24, 39, 54],
     departuresSouth: [13, 28, 43, 58],
   },
   {
@@ -203,7 +203,7 @@ export const subwayStations: Station[] = [
       KRISTINEBERG: 3,
       STORA_MOSSEN: 2,
     },
-    departuresNorth: [42, 57, 12, 27],
+    departuresNorth: [12, 27, 42, 57],
     departuresSouth: [10, 25, 40, 55],
   },
   {
@@ -213,7 +213,7 @@ export const subwayStations: Station[] = [
       ALVIK: 2,
       ABRAHAMSSBERG: 2,
     },
-    departuresNorth: [44, 59, 14, 29],
+    departuresNorth: [14, 29, 44, 59],
     departuresSouth: [8, 23, 38, 53],
   },
   {
@@ -223,7 +223,7 @@ export const subwayStations: Station[] = [
       STORA_MOSSEN: 2,
       BROMMAPLAN: 2,
     },
-    departuresNorth: [46, 1, 16, 31],
+    departuresNorth: [1, 16, 31, 46],
     departuresSouth: [6, 21, 36, 51],
   },
   {
@@ -233,7 +233,7 @@ export const subwayStations: Station[] = [
       ABRAHAMSSBERG: 2,
       ÅKESHOV: 3,
     },
-    departuresNorth: [48, 3, 18, 33],
+    departuresNorth: [3, 18, 33, 48],
     departuresSouth: [4, 19, 34, 49],
   },
   {
@@ -242,7 +242,7 @@ export const subwayStations: Station[] = [
     relations: {
       BROMMAPLAN: 3,
     },
-    departuresNorth: [51, 6, 21, 36],
+    departuresNorth: [6, 21, 36, 51],
     departuresSouth: [1, 16, 31, 46],
   },
 ];
