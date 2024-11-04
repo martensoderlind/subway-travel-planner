@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { serviceFactory } from "./service";
-import { FavouriteRoutes } from "../routeDB/mockdb";
+import { FavouriteRoutes } from "../../routeDB/mockdb";
 import { v4 } from "uuid";
 import { deleteSchema, postSchema } from "./input";
 

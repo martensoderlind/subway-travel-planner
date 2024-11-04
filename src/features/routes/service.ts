@@ -1,4 +1,4 @@
-import { FavouriteRoutes, favouriteRoutes } from "../routeDB/mockdb";
+import { FavouriteRoutes, favouriteRoutes } from "../../routeDB/mockdb";
 
 export function serviceFactory(favouriteRoutes: FavouriteRoutes[]) {
   return {

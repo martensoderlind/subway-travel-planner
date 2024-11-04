@@ -2,7 +2,7 @@ import express from "express";
 import { subwayStations } from "./stationDB/mockdb";
 import { createStationsRouter } from "./features";
 import { createFavouriteRouteRouter } from "./features/routes";
-import { favouriteRoutes } from "./features/routeDB/mockdb";
+import { favouriteRoutes } from "./routeDB/mockdb";
 
 export function createApp() {
   const app = express();
