@@ -3,11 +3,11 @@ import { Station } from "../../stationDB/mockdb";
 import { serviceFactory } from "./service";
 import { travelschema } from "./input";
 
-export function stationsFacory(subwayStations: Station[]) {
+export function stationsFactory(subwayStations: Station[]) {
   const service = serviceFactory(subwayStations);
   return {
     service,
-    routerFatory: () => {
+    routerFactory: () => {
       const router = Router();
 
       router.get("/", async (req, res) => {
